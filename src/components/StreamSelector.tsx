@@ -11,6 +11,7 @@ interface StreamSelectorProps {
 import CollegeFinder from './CollegeFinder2';
 import CommerceCollegeFinder from './Commerce';
 import Arts from './Arts';
+import { useEffect } from 'react';
 
 const StreamSelector = ({ language }: StreamSelectorProps) => {
   const [selectedGrade, setSelectedGrade] = useState<'10th' | '12th' | null>(null);
@@ -19,6 +20,28 @@ const StreamSelector = ({ language }: StreamSelectorProps) => {
   const [showMedicalColleges, setShowMedicalColleges] = useState(false);
   const [showArtsColleges, setShowArtsColleges] = useState(false);
   const [showCommerceColleges, setShowCommerceColleges] = useState(false);
+  const [colleges, setColleges] = useState<any[]>([]);
+  const [loadingColleges, setLoadingColleges] = useState(false);
+  const [errorColleges, setErrorColleges] = useState<string | null>(null);
+
+  useEffect(() => {
+    if (!selectedGrade) return;
+    setLoadingColleges(true);
+    setErrorColleges(null);
+    let url = '';
+    if (selectedGrade === '10th') url = 'http://localhost:5000/api/10th-colleges';
+    if (selectedGrade === '12th') url = 'http://localhost:5000/api/12th-colleges';
+    fetch(url)
+      .then(res => res.json())
+      .then(data => {
+        setColleges(data);
+        setLoadingColleges(false);
+      })
+      .catch(err => {
+        setErrorColleges('Failed to load colleges');
+        setLoadingColleges(false);
+      });
+  }, [selectedGrade]);
 
   // Static data for medical colleges
   // List of top medical colleges in India. Add, remove, or edit as needed.

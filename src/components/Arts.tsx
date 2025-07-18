@@ -1,28 +1,8 @@
 import React, { useState } from 'react';
+import { College } from '../types/College';
 
-interface College {
-  id: number;
-  name: string;
-  location: string;
-  type: string;
-  ranking: number;
-  fees: string;
-  courses: string[];
-  phone: string;
-  website: string;
-  email: string;
-  image: string;
-  description: string;
-}
-
-interface CollegeFinderProps {
-  language?: string;
-  colleges?: College[];
-  states?: string[];
-}
 
 const defaultColleges: College[] = [
-
         {
           id: 1,
           name: "Indian Institute of Technology Madras",
@@ -91,7 +71,7 @@ const defaultColleges: College[] = [
           phone: "+91-11-2766-7725",
           website: "http://www.du.ac.in/",
           email: "vc@du.ac.in",
-          image: "https://www.du.ac.in/du/uploads/images/du_logo.jpg",
+          image: "https://www.shutterstock.com/image-vector/elearning-line-flat-vector-icon-600nw-615726242.jpg",
           description: "One of India's largest universities with diverse courses and vibrant campus life."
         },
         {
@@ -894,7 +874,7 @@ const defaultColleges: College[] = [
           phone: "+91-44-2235 7004",
           website: "https://www.annauniv.edu/",
           email: "registrar@annauniv.edu",
-          image: "https://www.annauniv.edu/images/au_logo.png",
+          image: "https://www.shutterstock.com/image-vector/elearning-line-flat-vector-icon-600nw-615726242.jpg",
           description: "Prestigious state technical university with a large network of affiliated colleges and a strong reputation for research."
         },
         {
@@ -964,9 +944,17 @@ const defaultStates: string[] = [
   "Punjab", "Rajasthan", "Sikkim", "Tamil Nadu", "Telangana",
   "Tripura", "Uttar Pradesh", "Uttarakhand", "West Bengal"
 ];
-const Arts: React.FC<CollegeFinderProps> = ({
+
+
+interface ArtsProps {
+  language?: string;
+  states?: string[];
+  colleges?: College[];
+}
+
+const Arts: React.FC<ArtsProps> = ({
     language = 'en',
-    colleges = defaultColleges,
+    colleges = [],
     states = defaultStates
   }) => {
   const [searchQuery, setSearchQuery] = useState('');
@@ -974,7 +962,8 @@ const Arts: React.FC<CollegeFinderProps> = ({
   const [selectedType, setSelectedType] = useState('');
   const [selectedCourse, setSelectedCourse] = useState('');
 
-  const filteredColleges = colleges.filter(college => {
+  // Defensive: handle undefined colleges
+  const filteredColleges = (colleges ?? []).filter(college => {
     const matchesQuery =
       college.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
       college.location.toLowerCase().includes(searchQuery.toLowerCase());
