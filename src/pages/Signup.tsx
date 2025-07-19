@@ -15,14 +15,15 @@ const SignupPage: React.FC = () => {
     setError('');
     setLoading(true);
     try {
-      const response = await fetch('/api/auth/signup', {
+      const response = await fetch('http://localhost:5001/api/auth/signup', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ name, email, password, role }),
+      body: JSON.stringify({ username: name, email, password, role }),
       });
       if (!response.ok) throw new Error('Signup failed');
       // After signup, redirect to login
       setTimeout(() => navigate('/login', { replace: true }), 500);
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (err: any) {
       setError(err.message || 'Signup failed');
     } finally {

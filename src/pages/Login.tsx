@@ -18,7 +18,7 @@ const LoginPage: React.FC<LoginProps> = ({ onLoginSuccess }) => {
     setError('');
     setLoading(true);
     try {
-      const response = await fetch('/api/auth/login', {
+      const response = await fetch('http://localhost:5001/api/auth/login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email, password }),
@@ -29,8 +29,10 @@ const LoginPage: React.FC<LoginProps> = ({ onLoginSuccess }) => {
       localStorage.setItem('role', data.role); // Save role for dashboard
       if (onLoginSuccess) onLoginSuccess();
       // Redirect to previous page or dashboard
-      const from = (location.state as any)?.from?.pathname || '/dashboard';
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const from = (location.state as any)?.from?.pathname || '/';
       setTimeout(() => navigate(from, { replace: true }), 500);
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (err: any) {
       setError(err.message || 'Login failed');
     } finally {
