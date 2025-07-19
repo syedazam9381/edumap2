@@ -1,6 +1,6 @@
 
 import { useState } from 'react';
-import Navbar from '@/components/Navbar';
+
 import { Link } from 'react-router-dom';
 import { BookOpen, Users, Globe, MessageCircle, ChevronRight, Target, TrendingUp, Award } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -221,51 +221,12 @@ const Index = () => {
 
   return (
     <div className="min-h-screen bg-background">
-      {/* Navigation */}
-      <Navbar />
-      {/* Main Content */}
-      <main className="pt-24">
-        <section className="max-w-4xl mx-auto text-center py-10">
-          <h1 className="text-4xl md:text-5xl font-extrabold text-blue-900 mb-4">Welcome to PathFinder India</h1>
-          <p className="text-lg md:text-xl text-gray-700 mb-8">Discover your perfect career path, find top colleges, and get expert guidance for your journey after 10th and 12th grade.</p>
-          <div className="flex flex-col md:flex-row gap-4 justify-center mb-10">
-            <Button asChild size="lg" className="bg-blue-700 text-white hover:bg-blue-800">
-              <Link to="/explore">Explore Streams</Link>
-            </Button>
-            <Button asChild size="lg" variant="outline" className="border-blue-700 text-blue-700 hover:bg-blue-50">
-              <Link to="/colleges">Find Colleges</Link>
-            </Button>
-            <Button asChild size="lg" variant="ghost">
-              <Link to="/profile">Go to Profile</Link>
-            </Button>
-          </div>
-        </section>
-        {/* Stats Section */}
-        <section className="py-12 bg-gradient-to-r from-blue-50 to-purple-50">
-          <div className="max-w-5xl mx-auto px-4">
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
-              <div className="flex flex-col items-center">
-                <Users className="h-12 w-12 text-blue-600 mb-4" />
-                <h3 className="text-3xl font-bold text-gray-800">10M+ Students Guided</h3>
-                <p className="text-gray-600">Happy Students</p>
-              </div>
-              <div className="flex flex-col items-center">
-                <Award className="h-12 w-12 text-emerald-600 mb-4" />
-                <h3 className="text-3xl font-bold text-gray-800">5000+ Colleges Listed</h3>
-                <p className="text-gray-600">Partner Colleges</p>
-              </div>
-              <div className="flex flex-col items-center">
-                <TrendingUp className="h-12 w-12 text-purple-600 mb-4" />
-                <h3 className="text-3xl font-bold text-gray-800">95% Success Rate</h3>
-                <p className="text-gray-600">Success Stories</p>
-              </div>
-            </div>
-          </div>
-        </section>
-      </main>
-      {/* Chatbot */}
-      <ChatBot language={language} />
-    </div>
+  {/* Navigation */}
+  {/* Main Content */}
+  {renderContent()}
+  {/* Chatbot */}
+  <ChatBot language={language} />
+</div>
   );
 };
 

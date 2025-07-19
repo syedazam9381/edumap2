@@ -18,7 +18,7 @@ const Signup: React.FC<SignupProps> = ({ onSignupSuccess }) => {
     setError('');
     setSuccess(false);
     try {
-      const res = await fetch('http://localhost:5000/api/auth/signup', {
+      const res = await fetch('http://localhost:5001/api/auth/signup', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ username, email, password })

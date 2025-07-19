@@ -10,7 +10,7 @@ const Profile: React.FC = () => {
       setError('Not logged in');
       return;
     }
-    fetch('http://localhost:5000/api/profile', {
+    fetch('http://localhost:5001/api/profile', {
       headers: { Authorization: `Bearer ${token}` }
     })
       .then(res => res.ok ? res.json() : Promise.reject(res))

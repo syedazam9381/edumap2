@@ -20,7 +20,7 @@ import CollegeDetail from "./pages/CollegeDetail";
 import ChatbotPage from "./pages/Chatbot";
 import { RedirectToDashboard, DashboardRouter } from "./AppHelpers";
 import ResetAppButton from "./components/ResetAppButton";
-import Header from "./components/Header";
+
 import Footer from "./components/Footer";
 
 const queryClient = new QueryClient();
@@ -31,7 +31,6 @@ const App = () => (
       <Toaster />
       <Sonner />
       <BrowserRouter>
-        <Header />
         <Navbar />
         <ResetAppButton />
         <Routes>
