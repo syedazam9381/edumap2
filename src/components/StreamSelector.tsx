@@ -11,15 +11,21 @@ interface StreamSelectorProps {
 import CollegeFinder from './CollegeFinder2';
 import CommerceCollegeFinder from './Commerce';
 import Arts from './Arts';
+import Polytechnic from './ui/Polytechnic';
+import Iti from './ui/iti'
 import { useEffect } from 'react';
 
 const StreamSelector = ({ language }: StreamSelectorProps) => {
   const [selectedGrade, setSelectedGrade] = useState<'10th' | '12th' | null>(null);
   const [selectedStream, setSelectedStream] = useState<string | null>(null);
+
   const [showEngineeringColleges, setShowEngineeringColleges] = useState(false);
   const [showMedicalColleges, setShowMedicalColleges] = useState(false);
   const [showArtsColleges, setShowArtsColleges] = useState(false);
   const [showCommerceColleges, setShowCommerceColleges] = useState(false);
+  const [polytechnicColleges, setPolytechnicColleges] = useState(false);
+  const [iti, setIti] = useState(false);
+
   const [colleges, setColleges] = useState<any[]>([]);
   const [loadingColleges, setLoadingColleges] = useState(false);
   const [errorColleges, setErrorColleges] = useState<string | null>(null);
@@ -31,16 +37,16 @@ const StreamSelector = ({ language }: StreamSelectorProps) => {
     let url = '';
     if (selectedGrade === '10th') url = 'http://localhost:5000/api/10th-colleges';
     if (selectedGrade === '12th') url = 'http://localhost:5000/api/12th-colleges';
-    fetch(url)
-      .then(res => res.json())
-      .then(data => {
-        setColleges(data);
-        setLoadingColleges(false);
-      })
-      .catch(err => {
-        setErrorColleges('Failed to load colleges');
-        setLoadingColleges(false);
-      });
+    // fetch(url)
+    //   .then(res => res.json())
+    //   .then(data => {
+    //     setColleges(data);
+    //     setLoadingColleges(false);
+    //   })
+    //   .catch(err => {
+    //     setErrorColleges('Failed to load colleges');
+    //     setLoadingColleges(false);
+    //   });
   }, [selectedGrade]);
 
   // Static data for medical colleges
@@ -894,6 +900,8 @@ const StreamSelector = ({ language }: StreamSelectorProps) => {
   }
 
   if (showEngineeringColleges) {
+    console.log(language);
+    
     return (
       <div className="min-h-screen bg-gradient-to-br from-blue-50 to-purple-50 p-4">
         <div className="max-w-7xl mx-auto">
@@ -928,6 +936,36 @@ const StreamSelector = ({ language }: StreamSelectorProps) => {
         </div>
       </div>
     );
+  }
+
+  if(polytechnicColleges){
+    console.log("kwilsl");
+    
+        return (
+      <div className="min-h-screen bg-gradient-to-br from-blue-50 to-purple-50 p-4">
+        <div className="max-w-7xl mx-auto">
+          <Button variant="outline" className="mb-6" onClick={() => setPolytechnicColleges(false)}>
+            ← Back to Streams
+          </Button>
+          <Polytechnic language={language}  />
+        </div>
+      </div>
+    );
+
+  }
+  if(iti){
+    
+        return (
+      <div className="min-h-screen bg-gradient-to-br from-blue-50 to-purple-50 p-4">
+        <div className="max-w-7xl mx-auto">
+          <Button variant="outline" className="mb-6" onClick={() => setPolytechnicColleges(false)}>
+            ← Back to Streams
+          </Button>
+          <Iti language={language}  />
+        </div>
+      </div>
+    );
+
   }
 
   return (
@@ -1044,6 +1082,14 @@ const StreamSelector = ({ language }: StreamSelectorProps) => {
                           }
                           if (streamKey === 'arts') {
                               setShowArtsColleges(true);
+                          }
+                          if(streamKey === 'polytechnic'){
+                            console.log('cksme');
+                            setPolytechnicColleges(true);
+                          }
+                          if(streamKey === 'iti'){
+                            console.log('cksme');
+                            setIti(true);
                           }
                         }}
                       >

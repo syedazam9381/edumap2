@@ -967,22 +967,24 @@ const CollegeFinder: React.FC<CollegeFinder2Props> = ({
   const [selectedCourse, setSelectedCourse] = useState('');
 
   // Defensive: handle undefined colleges
-  const filteredColleges = (colleges ?? []).filter(college => {
-    const matchesQuery =
-      college.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      college.location.toLowerCase().includes(searchQuery.toLowerCase());
+  // const filteredColleges = (colleges ?? []).filter(college => {
+  //   const matchesQuery =
+  //     college.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+  //     college.location.toLowerCase().includes(searchQuery.toLowerCase());
 
-    const matchesState = selectedState
-      ? college.location.toLowerCase().includes(selectedState.toLowerCase())
-      : true;
+  //   const matchesState = selectedState
+  //     ? college.location.toLowerCase().includes(selectedState.toLowerCase())
+  //     : true;
 
-    const matchesType = selectedType ? college.type === selectedType : true;
-    const matchesCourse = selectedCourse
-      ? college.courses.includes(selectedCourse)
-      : true;
+  //   const matchesType = selectedType ? college.type === selectedType : true;
+  //   const matchesCourse = selectedCourse
+  //     ? college.courses.includes(selectedCourse)
+  //     : true;
 
-    return matchesQuery && matchesState && matchesType && matchesCourse;
-  });
+  //   return matchesQuery && matchesState && matchesType && matchesCourse;
+  // });
+
+  const filteredColleges = defaultColleges;
 
   return (
     <div className="py-10 px-4 max-w-7xl mx-auto">
